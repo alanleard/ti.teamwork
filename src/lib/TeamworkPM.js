@@ -198,15 +198,6 @@ var teamApi = (function() {
     // | Public members.       |
     // +-----------------------+
           
-    /* Teamwork API Set.
-     *  params:{
-     *          id:         The primary id of the object request
-     *          alt_id:     Some API's require a second ID
-     *          body:       JSON body to pass with "POST" or "PUT" sample format: '{"todo-list":{"name":"Test","private":true,"pinned":true,"tracked":true,"description":"Test"}}'
-     *          onload:     The onload callback, returns single parameter as parsed JSON
-     *          onerror:    The onerror callback, returns single parameter as error response
-     *  }
-     */
     publicMethods.setAuth = function(params){
         if(params && params!="clear"){
             if(params.apiKey){
@@ -234,9 +225,20 @@ var teamApi = (function() {
         }
     };
     
+    //Generate public API methods
     for(var method in API){
         createMethod(method)
     }
+     
+     /* Teamwork API Set.
+     *  params:{
+     *          id:         The primary id of the object request
+     *          alt_id:     Some API's require a second ID
+     *          body:       JSON body to pass with "POST" or "PUT" sample format: '{"todo-list":{"name":"Test","private":true,"pinned":true,"tracked":true,"description":"Test"}}'
+     *          onload:     The onload callback, returns single parameter as parsed JSON
+     *          onerror:    The onerror callback, returns single parameter as error response
+     *  }
+     */
 
     function createMethod(_method){
         if(API[_method].url.indexOf("{id}")!=-1 && API[_method].url.indexOf("{alt_id}")!=-1){
