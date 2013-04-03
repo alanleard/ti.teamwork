@@ -43,14 +43,14 @@ var teamApi = (function() {
         updateProjectCategory:{url:'projectCategories/{id}',type:'PUT'},
         deleteProjectCategory:{url:'projectCategories/{id}',type:'DELETE'},
         getCategories:{url:'projects/{id}/messageCategories',type:'POST'},
-        getRecentComments:{url:'{id}/{alt_id}/comments',type:'PUT'},
+        getRecentComments:{url:'{id}/{alt_id}/comments',type:'GET'},
         getComment:{url:'comments/{id}',type:'DELETE'},
         createComment:{url:'/{id}/{alt_id}/comments',type:'GET'},
-        updateComment:{url:'comments/{id}//PUT',type:'GET'},
-        deleteComment:{url:'comments/{id}//DELETE',type:'GET'},
+        updateComment:{url:'comments/{id}',type:'PUT'},
+        deleteComment:{url:'comments/{id}',type:'DELETE'},
         createCompany:{url:'companies',type:'GET'},
-        updateCompany:{url:'companies/{id}//PUT',type:'GET'},
-        deleteCompany:{url:'companies/{id}//DELETE',type:'GET'},
+        updateCompany:{url:'companies/{id}',type:'PUT'},
+        deleteCompany:{url:'companies/{id}',type:'DELETE'},
         getCompany:{url:'companies/{id}',type:'GET'},
         getAllCompanies:{url:'companies',type:'GET'},
         getProjectCompanies:{url:'projects/{id}/companies',type:'GET'},
@@ -191,8 +191,9 @@ var teamApi = (function() {
             xhr.onload = function(e) {
                 e.status = this.status;
                 if (this.status == 200 || this.status == 201) {
-                    log.debug("Teamwork Response: "+this.responseText);
-                    onload && onload(JSON.parse(this.responseText));
+                        onload && onload(JSON.parse(this.responseText));
+                        log.debug("Teamwork Response: "+this.responseText);
+                   
                 } else if(this.status === 204){
                     log.debug("Teamwork Response: NO CONTENT");
                     onload && onload("No Available Content");
@@ -247,7 +248,6 @@ var teamApi = (function() {
             logLevel = 'info'
         }
     };
-    
     publicMethods.setResponseType = function(params){
         if(params && params=="json"){
             responseType = ".json"
