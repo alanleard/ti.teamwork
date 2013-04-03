@@ -180,8 +180,8 @@ var teamApi = (function() {
     var fetch = function(params) {
         
        if(Ti.App.Properties.hasProperty('ti.teamwork.auth')){
-            
-            var url = encodeURI(urlRoot + params.url + responseType);
+            var url_params = params.url_params || null;
+            var url = encodeURI(urlRoot + params.url + responseType + "?"+ url_params);
             var body = params.body || null;
             var type = params.type?params.type:"GET";
             var onload = params.onload || null;
